@@ -23,17 +23,7 @@ public class QuestionService {
         return new ResponseEntity<>("Ajouter avec succèss", HttpStatus.CREATED);
     }
 
-    //Rechercher par categorie
-    
-    public ResponseEntity<List<Question>>getQuestionByCategory(String category){
-      try {
-         return new ResponseEntity<>( questionRepository.findByCategory(category), HttpStatus.OK);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-
-      return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
-    }
+   
 
     //Supprimer des questions
     public String SupprimerQuestions(Integer idQ, Question question){

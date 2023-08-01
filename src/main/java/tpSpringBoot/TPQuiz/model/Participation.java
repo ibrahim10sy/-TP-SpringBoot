@@ -1,28 +1,31 @@
 package tpSpringBoot.TPQuiz.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
-@Data
 @Entity
-@Table(name="reponse")
-public class Reponse {
+public class Participation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idR;
+    private Integer idP;
 
-    @Column(length = 150)
-    private String optionR;
+    @Column(nullable = false)
+    private int score;
 
-    @Column(length = 150)
-    private Boolean vraiReponse;
+    @ManyToMany
+    List<User> user;
 
-   
+    @ManyToOne
+    private Quiz quiz;
 
+    
+    
 }

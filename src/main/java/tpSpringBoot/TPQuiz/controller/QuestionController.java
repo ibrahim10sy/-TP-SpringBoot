@@ -33,11 +33,12 @@ public class QuestionController {
         return questionService.getAllQuestion();
     }
 
-    //Recherche par categorie
-     @GetMapping("category/{category}")
-    public ResponseEntity<List<Question>> getQuestionByCategory(@PathVariable String category) {
-        return questionService.getQuestionByCategory(category);
-    }
+    // //Recherche par categorie
+    //  @GetMapping("category/{category}")
+    // public ResponseEntity<List<Question>> getQuestionByCategory(@PathVariable String category) {
+    //     return questionService.getQuestionByCategory(category);
+    // }
+    
     //Suppression
     @DeleteMapping("question/{idQ}")
     public String Question(@PathVariable Integer idQ, @RequestBody Question question ){

@@ -18,12 +18,11 @@ public class Question {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idQ;
+    private Integer idQs;
 
     @Column(length = 150)
     private String titreQuestion;
-    @Column(length = 150)
-    private String category;
+
 
     @ManyToMany
     private List<Reponse> reponse;
