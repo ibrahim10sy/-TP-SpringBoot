@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 // import tpSpringBoot.TPQuiz.model.Question;
 import tpSpringBoot.TPQuiz.model.Quiz;
+import tpSpringBoot.TPQuiz.model.User;
 // import tpSpringBoot.TPQuiz.model.Reponse;
 import tpSpringBoot.TPQuiz.repository.QuestionRepository;
 import tpSpringBoot.TPQuiz.repository.QuizRepository;
@@ -40,6 +41,17 @@ public class QuizService {
 
       return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
+
+
+     public ResponseEntity <List<Quiz>> getAllQuiz() {
+        try {
+            return new ResponseEntity<>(quizRepository.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+       return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    }
+    
 
   
     //Supprimer des questions

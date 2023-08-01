@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tpSpringBoot.TPQuiz.model.Participation;
 import tpSpringBoot.TPQuiz.model.Question;
 import tpSpringBoot.TPQuiz.model.Quiz;
 import tpSpringBoot.TPQuiz.service.QuestionService;
@@ -38,7 +39,12 @@ public class QuizController {
         return quizService.getQuizByCategory(category);
     }
 
-        //Suppression
+    @GetMapping("/all")
+    public ResponseEntity<List<Quiz>> getAllQuiz() {
+        return quizService.getAllQuiz();
+    }
+
+    //Suppression
     @DeleteMapping("quiz/{idQz}")
     public String Quiz(@PathVariable Integer idQz, @RequestBody Quiz quiz ){
         return quizService.SupprimerQuiz(idQz, quiz);

@@ -6,5 +6,5 @@ import tpSpringBoot.TPQuiz.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     
-    User findByNom(String pseudo);
+    User findByPseudo(String pseudo);
 }
