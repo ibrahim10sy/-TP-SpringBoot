@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tpSpringBoot.TPQuiz.model.Participation;
-import tpSpringBoot.TPQuiz.model.Question;
-import tpSpringBoot.TPQuiz.model.Quiz;
+// import tpSpringBoot.TPQuiz.model.Question;
+// import tpSpringBoot.TPQuiz.model.Quiz;
 import tpSpringBoot.TPQuiz.model.Reponse;
 import tpSpringBoot.TPQuiz.model.User;
 import tpSpringBoot.TPQuiz.repository.UserRepository;
@@ -41,19 +41,22 @@ public class ParticipationController {
     QuizService quizService;
 
     @Autowired
-    QuizController quizController;
+    public ParticipationController(QuizService quizService, ParticipationService participationService) {
+        this.quizService = quizService;
+        this.participationService = participationService;
+    }
 
   
    
-    
+    //Constructeur pour verifier les donnees du user
     public ParticipationController(UserRepository userRepository){
-    
         this.userRepository = userRepository;
     }
-    @PostMapping("submit/{id}")
-    public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id,
-    @RequestBody List<Reponse> response) {
-    return participationService.calculateResult(id, response);
+
+
+    @PostMapping("/participer/{IdQz}")
+    public ResponseEntity<Integer> participer(@PathVariable Integer IdQz, @RequestBody List<Reponse> reponses) {
+        return participationService.calculateResult(IdQz, reponses);
     }
 
     @PostMapping("/connexion")

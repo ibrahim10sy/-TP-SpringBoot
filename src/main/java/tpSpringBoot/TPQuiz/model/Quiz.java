@@ -28,6 +28,9 @@ public class Quiz {
     @Column(length = 150)
     private String category;
 
+    @ManyToMany(mappedBy = "quizs")
+    private List<Participation> participations;
+
     @ManyToMany
     private List<Question> question;
 }

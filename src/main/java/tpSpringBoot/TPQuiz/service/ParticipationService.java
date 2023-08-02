@@ -36,32 +36,67 @@ public class ParticipationService {
 
 
     //Calculer resultat
-    public ResponseEntity<Integer> calculateResult(Integer id, List<Reponse> reponses) {
-        Quiz quiz = quizRepository.findById(id).orElse(null);
+    // public ResponseEntity<Integer> calculateResult(Integer idR, List<Reponse> reponses) {
+    //     Quiz quiz = quizRepository.findById(idR).orElse(null);
+    //     if (quiz == null) {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+        
+    //     List<Question> questions = quiz.getQuestion();
+    //     if (questions.size() != reponses.size()) {
+    //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    //     }
+    
+
+    //     int score = 0;
+    //     for (int i = 0; i < questions.size(); i++) {
+    //         Question question = questions.get(i);
+    //         Reponse reponseUtilisateur = reponses.get(i);
+    
+           
+    //         if(reponseUtilisateur.getOptionR().equals(reponses.getVraiReponse()))
+    //         score++;
+    //     }
+     
+    //     return new ResponseEntity<>(score, HttpStatus.OK);
+    // }
+
+    public ResponseEntity<Integer> calculateResult(Integer IdQz, List<Reponse> reponses) {
+        Quiz quiz = quizRepository.findById(IdQz).orElse(null);
         if (quiz == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    
+
         List<Question> questions = quiz.getQuestion();
         if (questions.size() != reponses.size()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    
+
         int score = 0;
         for (int i = 0; i < questions.size(); i++) {
             // Question question = questions.get(i);
             Reponse reponseUtilisateur = reponses.get(i);
-    
+
             // Vérifier si la réponse de l'utilisateur est correcte
-            // if (reponseUtilisateur.getVraiReponse() && reponseUtilisateur.getOptionR()==true ) {
-            //     score++;
-            // }
-            if(reponseUtilisateur.getOptionR().equals(reponseUtilisateur.getVraiReponse().toString()))
-            score++;
+            if (reponseUtilisateur.getVraiReponse() && reponseUtilisateur.getOptionR().equals(reponseUtilisateur.getVraiReponse().toString())) {
+                score++;
+            }
         }
-     
+
+        // Enregistrer le score de participation dans la base de données
+        Participation participation = new Participation();
+        participation.setScore(score);
+        List<Quiz> quizzes = new ArrayList<>();
+        quizzes.add(quiz); // Use List<Quiz> instead of Quiz
+        participation.setQuizs(quizzes);
+        participationRepository.save(participation);
+
         return new ResponseEntity<>(score, HttpStatus.OK);
     }
+
+
+
+
     
  //Liste des participations
     public ResponseEntity <List<Participation>> getAllParticipation() {

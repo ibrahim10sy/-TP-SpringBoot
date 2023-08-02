@@ -29,8 +29,10 @@ public class Participation {
     @ManyToMany
     List<User> user;
 
-    @ManyToOne
-    private Quiz quiz;
+ 
+
+    @ManyToMany
+    List<Quiz> quizs;
 
     
     
