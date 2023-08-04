@@ -31,35 +31,6 @@ public class ParticipationService {
    @Autowired
    QuestionRepository questionRepository;
 
-    //Liste des participations
-  
-
-
-    //Calculer resultat
-    // public ResponseEntity<Integer> calculateResult(Integer idR, List<Reponse> reponses) {
-    //     Quiz quiz = quizRepository.findById(idR).orElse(null);
-    //     if (quiz == null) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-        
-    //     List<Question> questions = quiz.getQuestion();
-    //     if (questions.size() != reponses.size()) {
-    //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    //     }
-    
-
-    //     int score = 0;
-    //     for (int i = 0; i < questions.size(); i++) {
-    //         Question question = questions.get(i);
-    //         Reponse reponseUtilisateur = reponses.get(i);
-    
-           
-    //         if(reponseUtilisateur.getOptionR().equals(reponses.getVraiReponse()))
-    //         score++;
-    //     }
-     
-    //     return new ResponseEntity<>(score, HttpStatus.OK);
-    // }
 
     public ResponseEntity<Integer> calculateResult(Integer IdQz, List<Reponse> reponses) {
         Quiz quiz = quizRepository.findById(IdQz).orElse(null);
